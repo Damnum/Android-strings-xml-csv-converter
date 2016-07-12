@@ -50,4 +50,17 @@ public class WriteXmlTest {
         assertThat(columns[0], is("\"first column\""));
         assertThat(columns[1], is("\"second column, with comma\""));
     }
+
+    @Test
+    public void testGetRowsForTextWithLinebreak() {
+        String realText = "\"ratePopup_after_upgrade\",\"true\",\"Congratulations! The upgrade was successful. Have fun using %1$s!\n\nIf you enjoy it, please take a moment to rate it. Thanks for your support!\",\"Herzlichen Glückwunsch, das Upgrade war erfolgreich. Viel Spaß weiterhin mit %1$s!\n\nWenn dir die App gefällt, freuen wir uns über eine Bewertung im Play Store. Vielen Dank!\"\n";
+        List<String[]> rows = WriteXml.getRowsForText(realText);
+
+        assertThat(rows, hasSize(1));
+
+        String[] columns = rows.get(0);
+
+        assertThat(columns.length, is(4));
+        assertThat(columns[3], is("\"Herzlichen Glückwunsch, das Upgrade war erfolgreich. Viel Spaß weiterhin mit %1$s!\n\nWenn dir die App gefällt, freuen wir uns über eine Bewertung im Play Store. Vielen Dank!\""));
+    }
 }

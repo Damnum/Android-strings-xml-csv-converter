@@ -99,8 +99,8 @@ class ReadXml {
         }
     }
 
-    protected static List getHeaderList(Map mainMap) {
-        List headerList = ["name", "translatable"]
+    protected static List<String> getHeaderList(Map mainMap) {
+        List<String> headerList = ["name", "translatable"]
         headerList.addAll mainMap.keySet()
         return headerList
     }

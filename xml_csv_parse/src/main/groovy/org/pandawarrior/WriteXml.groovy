@@ -10,6 +10,7 @@ class WriteXml {
     final static String ARRAY_FILE = "arrays"
     final static String PLURALS_FILE = "plurals"
     private static final String REGEX = /,(?=([^\"]*\"[^\"]*\")*[^\"]*$)/
+    private static final String LINEBREAK_REGEX = /\n(?=([^\"]*\"[^\"]*\")*[^\"]*$)/
 
     static boolean parse(String csvPath, String moduleFolder) {
         //load and split the file
@@ -36,7 +37,7 @@ class WriteXml {
     }
 
     protected static List<String[]> getRowsForText(String csv) {
-        String[] lines = csv.split('\n')
+        String[] lines = csv.split(LINEBREAK_REGEX)
         List<String[]> rows = lines.collect{
             it.split(REGEX, -1)
         }
@@ -71,6 +72,7 @@ class WriteXml {
                 def column = rows.get(j)
                 def name = column[0]
                 tempMap[name] = column[i + 2]
+                System.out.println("column " + i + " row " + j + " tempMap[name] " + tempMap[name])
             }
             mainDict[head[i].replaceAll("\"", "")] = tempMap
         }

@@ -49,7 +49,6 @@ class Controller {
     }
 
     public void x2c_runXMLtoCSV(ActionEvent actionEvent) {
-        try{
             String folderPath = x2c_txtXMLFolder.getText()
             String filePath = x2c_txtCSVFile.getText()
             if (folderPath.length() > 0 && filePath.length() > 0) {
@@ -67,10 +66,6 @@ class Controller {
                 x2c_indicator.setText("Please set folder or file location!")
                 x2c_indicator.setTextFill(Color.RED)
             }
-        }catch (ArrayIndexOutOfBoundsException e){
-            x2c_indicator.setText("Error! Try adding a space or null in the empty values")
-            x2c_indicator.setTextFill(Color.RED)
-        }
 
     }
 
@@ -92,7 +87,6 @@ class Controller {
     }
 
     public void c2x_runCSVtoXML(ActionEvent actionEvent) {
-        try{
             String selected = (myToggleGroup.selectedToggle as RadioButton).text
             boolean result
             switch (selected){
@@ -114,10 +108,6 @@ class Controller {
                 c2x_indicator.setText("SUCCESS!")
                 c2x_indicator.setTextFill(Color.GREEN)
             }
-        }catch (ArrayIndexOutOfBoundsException e){
-            c2x_indicator.setText("Error! Try adding a space or null in the empty values")
-            c2x_indicator.setTextFill(Color.RED)
-        }
 
     }
 
