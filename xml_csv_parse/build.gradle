@@ -12,5 +12,5 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile 'org.codehaus.groovy:groovy-all:2.4.3'
     testCompile 'junit:junit:4.12'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
 }
-

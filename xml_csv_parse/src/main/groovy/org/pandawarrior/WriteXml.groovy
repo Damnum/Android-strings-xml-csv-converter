@@ -31,7 +31,11 @@ class WriteXml {
     }
 
     protected static List getRows(String csvPath) {
-        String csv = new File(csvPath).getText()
+        return getRowsForText(new File(csvPath).getText());
+
+    }
+
+    protected static List<String[]> getRowsForText(String csv) {
         String[] lines = csv.split('\n')
         List<String[]> rows = lines.collect{
             it.split(REGEX, -1)
