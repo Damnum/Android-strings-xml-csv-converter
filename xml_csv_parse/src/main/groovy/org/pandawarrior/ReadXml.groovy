@@ -42,7 +42,7 @@ class ReadXml {
      * @return
      */
     static boolean parseArray(String moduleFolder, String csvDestination, Pattern pattern, String type) {
-        Map stringsXMLMap = getXmlFromFolder(moduleFolder, pattern)
+        Map<String, String> stringsXMLMap = getXmlFromFolder(moduleFolder, pattern)
         if (stringsXMLMap.size() > 0){
             Map arrayMap = getArrayMap(stringsXMLMap, type)
             Map translatableMap = getTranslatableArray(stringsXMLMap, type)
@@ -84,8 +84,14 @@ class ReadXml {
         }
     }
 
-    protected static Map getXmlFromFolder(String dirname, Pattern pattern) {
-        Map stringsXMLMap = [:]
+    /**
+     * Creates a map from a file read
+     * @param dirname parent directory
+     * @param pattern regex matching the file
+     * @return map key: file name, value: xml string
+     */
+    protected static Map<String, String> getXmlFromFolder(String dirname, Pattern pattern) {
+        Map<String, String> stringsXMLMap = [:]
         try{
             new File(dirname).eachDirRecurse { dir ->
                 dir.eachFileMatch(pattern) { myfile ->
@@ -173,12 +179,17 @@ class ReadXml {
                 tempMap[it.@name as String] = it.text()
             }
             mainMap[it.key] = tempMap
-//                println mainMap
         }
         return mainMap
     }
 
-    protected static Map getArrayMap(Map stringsXMLMap, String type) {
+    /**
+     *
+     * @param stringsXMLMap
+     * @param type
+     * @return
+     */
+    protected static Map getArrayMap(Map<String, String> stringsXMLMap, String type) {
         Map mainMap = [:]
         stringsXMLMap.each {
             def tempMap = [:]
